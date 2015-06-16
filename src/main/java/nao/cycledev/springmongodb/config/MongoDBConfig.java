@@ -4,25 +4,26 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = "nao.cycledev.springmongodb.repository")
 @EnableMongoAuditing
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
-    @Value("mongo.host")
+    @Value("${mongo.host}")
     private String host;
 
-    @Value("mongo.port")
-    private int port;
+    @Value("${mongo.port}")
+    private Integer port;
 
-    @Value("mongo.dbname")
+    @Value("${mongo.dbname}")
     private String dbName;
 
-    @Value("package.base")
+    @Value("${package.base}")
     private String basePackage;
 
     @Override

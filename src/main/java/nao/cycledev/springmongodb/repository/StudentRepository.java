@@ -2,6 +2,8 @@ package nao.cycledev.springmongodb.repository;
 
 import nao.cycledev.springmongodb.model.Student;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-interface StudentRepository  extends MongoRepository<Student, Long> {
+@Repository
+public interface StudentRepository extends MongoRepository<Student, String> {
 }

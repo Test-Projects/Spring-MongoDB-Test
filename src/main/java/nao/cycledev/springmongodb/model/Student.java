@@ -3,12 +3,14 @@ package nao.cycledev.springmongodb.model;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document
-public class Student {
+@Document(collection = "students")
+public class Student implements Persistable {
 
     @Id
     private String id;
@@ -17,6 +19,14 @@ public class Student {
     private int age;
     @CreatedDate private Date criationDate;
     @LastModifiedDate private Date modifiedDate;
+    @Version private Long version;
+
+    public Student(String id, String firstName, String lastName, int age) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 
     public String getId() {
         return id;
@@ -66,4 +76,8 @@ public class Student {
         this.modifiedDate = modifiedDate;
     }
 
+    @Override
+    public boolean isNew() {
+        return version == 0;
+    }
 }
